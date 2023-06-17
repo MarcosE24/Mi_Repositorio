@@ -14,6 +14,8 @@ class Empleado (models.Model):
     hora_salida=models.TimeField(blank=False)
     activo=models.BooleanField(blank=True,default=True)
     telefono=models.IntegerField(blank=True, default=0)
+    def __str__(self):
+        return self.nombre
 
 class Jornada (models.Model):
     marcacion=(("opcion1","Entrada"),
@@ -22,4 +24,5 @@ class Jornada (models.Model):
     id_empleado=models.ForeignKey(Empleado, on_delete=models.CASCADE)
     fecha=models.DateTimeField(blank=False)
     tipo_marcacion=models.CharField(blank=False, choices=marcacion, max_length=50)
-
+    def __str__(self):
+        return self.id_empleado.nombre
