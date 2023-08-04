@@ -16,16 +16,21 @@ class Tipo_Cancha(models.Model):
     capacidad=models.IntegerField(blank=False, default=0)
     class Meta:
         verbose_name_plural = "Tipos de Cancha"
+    def __str__(self):
+        return self.nombre
 
 class Cancha(models.Model):
     nombre=models.CharField(max_length=150, blank=False)
     id_tipo_cancha=models.ForeignKey(Tipo_Cancha, on_delete=models.CASCADE)
+    localidad=models.CharField(max_length=100, blank=False, default="")
     direccion=models.CharField(max_length=150, blank=False)
     costo_hora=models.IntegerField()
     hora_apertura=models.TimeField()
     hora_cierre=models.TimeField()
     class Meta:
         verbose_name_plural = "Canchas"
+    def __str__(self):
+        return self.nombre
 
 class Reserva(models.Model):
     id_usuario=models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -37,3 +42,9 @@ class Reserva(models.Model):
     estado=models.CharField(max_length=50)
     class Meta:
         verbose_name_plural = "Reservas"
+
+class Deporte(models.Model):
+    nombre=models.CharField(max_length=100)
+    descripcion=models.CharField(max_length=500)
+    class Meta:
+        verbose_name_plural = "Deportes"
